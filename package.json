@@ -20,17 +20,27 @@
       "import": "./dist/index.mjs"
     }
   },
+  "bin": {
+    "express-response-engine": "./bin/cli.js",
+    "create-express-server": "./bin/cli.js"
+  },
   "files": [
     "dist",
+    "bin",
     "README.md"
   ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
     "test": "ts-node scratch/test.ts",
+    "test:cli": "ts-node scratch/test-cli.ts",
+    "test:all": "npm test && npm run test:cli",
     "example": "npm run build && npm --prefix example start",
-    "start": "npm run example"
+    "start": "npm run example",
+    "init": "node bin/cli.js",
+    "create-server": "node bin/cli.js"
   },
+
   "keywords": [
     "express",
     "response",
@@ -40,7 +50,10 @@
     "api-response",
     "validation-formatter",
     "encryption",
-    "async-handler"
+    "async-handler",
+    "cli",
+    "scaffold",
+    "server-generator"
   ],
   "author": "",
   "license": "ISC",

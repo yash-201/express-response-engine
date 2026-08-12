@@ -363,6 +363,132 @@ The meta payload supplied to loggers includes:
 
 ---
 
+## CLI: Server Generator
+
+`express-response-engine` ships with a built-in CLI that **auto-generates a ready-to-run Express server file** so you can skip writing all the boilerplate yourself.
+
+### Quick Start
+
+```bash
+# Using npx (no install required)
+npx express-response-engine init
+
+# Or via npm script (after npm install)
+npm run create-server
+```
+
+### Smart Output Path
+
+The CLI automatically detects where to place the generated file:
+
+| Your project has…   | Generated file        |
+|---------------------|-----------------------|
+| A `src/` directory  | `src/index.js`        |
+| No `src/` directory | `index.js` (root)     |
+| `--ts` flag         | `src/index.ts` or `index.ts` |
+
+### Flags & Options
+
+```bash
+# Generate a TypeScript starter file
+npx express-response-engine init --ts
+
+# Specify a custom output path
+npx express-response-engine init server/app.js
+
+# Overwrite an existing file
+npx express-response-engine init --force
+
+# Show help
+npx express-response-engine --help
+```
+
+### What Gets Generated
+
+The generated `index.js` (or `index.ts`) is a **fully wired** Express server:
+
+```javascript
+'use strict';
+
+const express = require('express');
+const {
+  responseInterceptor,
+  errorInterceptor,
+  asyncHandler,
+  ApiError,
+} = require('express-response-engine');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(responseInterceptor());
+
+// ✅ Health Check Route
+app.get('/health', (req, res) => {
+  res.check(
+    { status: 'ok', uptime: process.uptime(), timestamp: new Date().toISOString() },
+    'Server is healthy'
+  );
+});
+
+// ✅ Example Route
+app.get(
+  '/api/example',
+  asyncHandler(async (req, res) => {
+    return res.success({ message: 'Hello from express-response-engine! 🚀' });
+  })
+);
+
+// Global Error Handler — must be LAST
+app.use(errorInterceptor());
+
+app.listen(PORT, () => {
+  console.log(`🚀 Server is running at http://localhost:${PORT}`);
+  console.log(`❤️  Health check: http://localhost:${PORT}/health`);
+});
+```
+
+### Running the Generated Server
+
+```bash
+# Install dependencies first (if not already)
+npm install express express-response-engine
+
+# Start the server
+node index.js
+# or
+node src/index.js
+
+# Override port via environment variable
+PORT=8080 node index.js
+```
+
+### Health Check Route
+
+Once running, visit:
+
+```
+GET http://localhost:3000/health
+```
+
+Returns:
+```json
+{
+  "success": true,
+  "statusCode": 200,
+  "message": "Server is healthy",
+  "data": {
+    "status": "ok",
+    "uptime": 3.14,
+    "timestamp": "2026-08-12T10:00:00.000Z"
+  }
+}
+```
+
+---
+
 ## License
 
 ISC
