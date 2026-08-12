@@ -1,6 +1,6 @@
 {
   "name": "express-response-engine",
-  "version": "1.1.0",
+  "version": "1.2.0",
 
   "repository": {
     "type": "git",
@@ -39,7 +39,9 @@
     "example": "npm run build && npm --prefix example start",
     "start": "npm run example",
     "init": "node bin/cli.js",
-    "create-server": "node bin/cli.js"
+    "create-server": "node bin/cli.js",
+    "module": "node bin/cli.js module",
+    "create-module": "node bin/cli.js module"
   },
 
   "keywords": [
@@ -67,6 +69,12 @@
     "typescript": "^5.7.3"
   },
   "peerDependencies": {
-    "express": "^4.0.0 || ^5.0.0"
+    "express": "^4.0.0 || ^5.0.0",
+    "express-validator": "^7.0.0"
+  },
+  "peerDependenciesMeta": {
+    "express-validator": {
+      "optional": true
+    }
   }
 }
