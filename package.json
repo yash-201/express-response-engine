@@ -1,7 +1,6 @@
 {
   "name": "express-response-engine",
-  "version": "1.1.0",
-
+  "version": "1.2.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yash-201/express-response-engine.git"
@@ -31,17 +30,18 @@
     "README.md"
   ],
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
+    "build": "node init && tsup",
+    "dev": "node init && tsup --watch",
     "test": "ts-node scratch/test.ts",
     "test:cli": "ts-node scratch/test-cli.ts",
     "test:all": "npm test && npm run test:cli",
     "example": "npm run build && npm --prefix example start",
-    "start": "npm run example",
+    "start": "node init && npm run example",
     "init": "node bin/cli.js",
-    "create-server": "node bin/cli.js"
+    "create-server": "node bin/cli.js",
+    "module": "node bin/cli.js module",
+    "create-module": "node bin/cli.js module"
   },
-
   "keywords": [
     "express",
     "response",
@@ -67,6 +67,12 @@
     "typescript": "^5.7.3"
   },
   "peerDependencies": {
-    "express": "^4.0.0 || ^5.0.0"
+    "express": "^4.0.0 || ^5.0.0",
+    "express-validator": "^7.0.0"
+  },
+  "peerDependenciesMeta": {
+    "express-validator": {
+      "optional": true
+    }
   }
 }

@@ -1,4 +1,4 @@
-# express-response-engine
+﻿# express-response-engine
 
 <p align="center">
   <img src="assets/banner.png" alt="Express Response Engine Banner" width="100%">
@@ -8,16 +8,16 @@
 
 ## Features
 
-- ✅ **Global Error Middleware**: Catch all errors and format them consistently.
-- ✅ **Response Interceptor**: Injects helper methods onto the `res` object.
-- ✅ **Async Handler Wrapper**: Wraps async controller routes to automatically forward errors to Express error handlers (supports Express 4 & 5).
-- ✅ **Custom ApiError Class**: Easily throw descriptive errors (e.g. `throw ApiError.notFound('User not found')`).
-- ✅ **Unified Responses**: Clean shapes for success and error bodies.
-- ✅ **Validation Formatter**: Auto-formats validation errors from **Zod**, **Joi**, and **Express Validator**.
-- ✅ **Optional AES-256-GCM Encryption**: Secure sensitive success payloads automatically.
-- ✅ **Request ID Support**: Generates or forwards unique request tracing IDs.
-- ✅ **Logging Hooks**: Attach Winston, Pino, or any logging callback.
-- ✅ **TypeScript Support**: Full autocomplete and type-safety with zero configuration.
+- âœ… **Global Error Middleware**: Catch all errors and format them consistently.
+- âœ… **Response Interceptor**: Injects helper methods onto the `res` object.
+- âœ… **Async Handler Wrapper**: Wraps async controller routes to automatically forward errors to Express error handlers (supports Express 4 & 5).
+- âœ… **Custom ApiError Class**: Easily throw descriptive errors (e.g. `throw ApiError.notFound('User not found')`).
+- âœ… **Unified Responses**: Clean shapes for success and error bodies.
+- âœ… **Validation Formatter**: Auto-formats validation errors from **Zod**, **Joi**, and **Express Validator**.
+- âœ… **Optional AES-256-GCM Encryption**: Secure sensitive success payloads automatically.
+- âœ… **Request ID Support**: Generates or forwards unique request tracing IDs.
+- âœ… **Logging Hooks**: Attach Winston, Pino, or any logging callback.
+- âœ… **TypeScript Support**: Full autocomplete and type-safety with zero configuration.
 
 ---
 
@@ -381,7 +381,7 @@ npm run create-server
 
 The CLI automatically detects where to place the generated file:
 
-| Your project has…   | Generated file        |
+| Your project hasâ€¦   | Generated file        |
 |---------------------|-----------------------|
 | A `src/` directory  | `src/index.js`        |
 | No `src/` directory | `index.js` (root)     |
@@ -425,7 +425,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(responseInterceptor());
 
-// ✅ Health Check Route
+// âœ… Health Check Route
 app.get('/health', (req, res) => {
   res.check(
     { status: 'ok', uptime: process.uptime(), timestamp: new Date().toISOString() },
@@ -433,20 +433,20 @@ app.get('/health', (req, res) => {
   );
 });
 
-// ✅ Example Route
+// âœ… Example Route
 app.get(
   '/api/example',
   asyncHandler(async (req, res) => {
-    return res.success({ message: 'Hello from express-response-engine! 🚀' });
+    return res.success({ message: 'Hello from express-response-engine! ðŸš€' });
   })
 );
 
-// Global Error Handler — must be LAST
+// Global Error Handler â€” must be LAST
 app.use(errorInterceptor());
 
 app.listen(PORT, () => {
-  console.log(`🚀 Server is running at http://localhost:${PORT}`);
-  console.log(`❤️  Health check: http://localhost:${PORT}/health`);
+  console.log(`ðŸš€ Server is running at http://localhost:${PORT}`);
+  console.log(`â¤ï¸  Health check: http://localhost:${PORT}/health`);
 });
 ```
 
@@ -492,3 +492,4 @@ Returns:
 ## License
 
 ISC
+
